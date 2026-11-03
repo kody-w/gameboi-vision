@@ -1,0 +1,13 @@
+{
+  "schema": "rapp-vision-network/1.0",
+  "hive_schema": "rapp-hive/1.0",
+  "id": "gameboi.vision",
+  "name": "gameboi vision",
+  "visibility": "public",
+  "revision": { "sequence": 1, "updated": "2026-11-03T17:50:00Z" },
+  "peers": [ { "id": "rapp.public.vision", "url": "https://kody-w.github.io/rapp-vision/channels.json" } ],
+  "_note": "A separate RAPP Vision registry (same pattern, own repo) for unedited AI playthroughs published by gameboi. Each publication pairs the clip with the button log that proves it.",
+  "channels": [
+    { "id": "gameboi", "name": "gameboi: AI playthroughs", "url": "channel.json", "repo": "https://github.com/kody-w/gameboi-vision" }
+  ]
+}

@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>gameboi run — live replay</title>
+<!-- gameboi-vision-app-v1: the real record of a run, driven by the replay. Reads the public arena (claims with evidence) and this clip's button log. -->
+<style>body{margin:0;background:#0b0f14;color:#e6edf3;font:15px/1.5 system-ui}main{max-width:900px;margin:0 auto;padding:20px}h1{font-size:20px;margin:0 0 6px}.muted{color:#8b98a5}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chip{border:1px solid #1f2a37;border-radius:8px;padding:5px 10px;font-size:13px;color:#8b98a5;cursor:pointer;background:none}.chip.on{border-color:#ffd166;color:#ffd166}.chip.hot{outline:2px solid #7cc4ff}
+#timeline{background:#111823;border:1px solid #1f2a37;border-radius:12px;padding:14px;margin:12px 0}#log{font-family:ui-monospace,Menlo,monospace;font-size:13px;max-height:220px;overflow:auto}
+button{background:#1b2838;color:#e6edf3;border:1px solid #1f2a37;border-radius:8px;padding:8px 14px;cursor:pointer}#now{font-size:28px;font-weight:700}</style></head><body><main>
+<h1>This run, on the public record</h1><p class="muted" id="who">loading the arena…</p>
+<div class="chips" id="badges"></div>
+<section id="timeline"><div class="muted">button log of this clip</div><div id="now">—</div><div id="log"></div><p><button id="play">▶ play the button log</button> <span class="muted" id="hint">every press the AI made in this clip, on the clock</span></p></section>
+<p class="muted">Source: <a id="arena" href="https://kody-w.github.io/gameboi-arena/">gameboi arena</a> (claims with evidence, never names).</p>
+</main><script>
+const q=new URLSearchParams(location.search);const run=q.get('run')||'';const clip=q.get('clip')||'';
+const N={'badge-1':'Badge 1','badge-2':'Badge 2','badge-3':'Badge 3','badge-4':'Badge 4','badge-5':'Badge 5','badge-6':'Badge 6','badge-7':'Badge 7','badge-8':'Badge 8'};
+(async()=>{try{const rs=await fetch('https://kody-w.github.io/gameboi-arena/api/v1/runs.json').then(r=>r.json());const r=rs.runs.find(x=>x.run_id===run);
+ if(r){document.getElementById('who').textContent=`${r.model} · ${r.game} · ${r.category} · run ${r.run_id} · ${r.badges}/8 badges`;document.getElementById('arena').href=`https://kody-w.github.io/gameboi-arena/?run=${r.run_id}`;
+ document.getElementById('badges').innerHTML=Object.keys(N).map(b=>{const c=r.claims[b];return `<button class="chip ${c?'on':''}" id="${b}" title="${c?c.at+' · '+c.decisions+' decisions':'not yet'}">${N[b]}${c?' ✓':''}</button>`}).join('');
+ document.querySelectorAll('.chip').forEach(el=>el.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('hot'));el.classList.add('hot');document.getElementById('now').textContent=el.title});}
+ else document.getElementById('who').textContent='run not on the arena yet: '+run;}catch(e){document.getElementById('who').textContent='arena unreachable: '+e.message}
+ let log=[];try{log=await fetch(`../evidence/${clip}.json`).then(r=>r.json())}catch(e){}
+ const el=document.getElementById('log');el.innerHTML=log.slice(0,400).map(x=>`<div data-t="${x.t}">${String(x.t).padStart(4,' ')}s  ${x.buttons.join('+')}  <span class="muted">${x.location||''}</span></div>`).join('')||'<div class="muted">no button log for this clip</div>';
+ document.getElementById('play').onclick=()=>{const t0=performance.now();const rows=[...el.children];(function tick(){const t=(performance.now()-t0)/1000;let last=null;for(const row of rows){if(+row.dataset.t<=t){row.style.color='#ffd166';last=row}else row.style.color=''}if(last){document.getElementById('now').textContent=last.textContent.trim();last.scrollIntoView({block:'nearest'})}if(t<(rows.length?+rows[rows.length-1].dataset.t+1:0))requestAnimationFrame(tick)})()};
+})();</script></body></html>
