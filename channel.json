@@ -106,6 +106,99 @@
    }
   },
   {
+   "id": "clip-12806-20261111-000857",
+   "title": "Celadon City, 3 badges, Nov 11 05:25 UTC",
+   "description": "Guided video: ten minutes of the AI playing, unedited. Live replay: the same minutes as the button log it pressed, driven on the public record of this run (arena run 23a69aed27a1).",
+   "published": "2026-11-11",
+   "duration": 600.0,
+   "width": 640,
+   "height": 576,
+   "orientation": "landscape",
+   "tags": [
+    "gameboi",
+    "yellow",
+    "ai-playthrough",
+    "live-replay"
+   ],
+   "thumb": "thumbs/clip-12806-20261111-000857.jpg",
+   "sources": [
+    {
+     "src": "media/clip-12806-20261111-000857.mp4",
+     "type": "video/mp4; codecs=\"avc1.640020\""
+    },
+    {
+     "src": "media/clip-12806-20261111-000857.webm",
+     "type": "video/webm; codecs=\"vp9\""
+    }
+   ],
+   "chapters": [
+    {
+     "t": 0,
+     "label": "Celadon City"
+    }
+   ],
+   "live": {
+    "kind": "rapp-vision-live/1.0",
+    "duration": 126,
+    "chapters": [
+     {
+      "t": 0,
+      "label": "What you are about to drive"
+     },
+     {
+      "t": 6,
+      "label": "The run's public record"
+     }
+    ],
+    "scenes": [
+     {
+      "t": 0,
+      "dur": 6,
+      "card": {
+       "title": "The proof is on the public record",
+       "sub": "This replay drives the arena entry for this run and plays back the exact buttons.",
+       "note": "Switch back to the guided video any time."
+      }
+     },
+     {
+      "t": 6,
+      "dur": 120,
+      "app": "app/run.html?run=23a69aed27a1&clip=clip-12806-20261111-000857",
+      "ready": {
+       "selector": "#play"
+      },
+      "lower": {
+       "title": "gameboi run 23a69aed27a1",
+       "bench": "badges on the public record",
+       "fix": "pause and take the wheel"
+      },
+      "actions": [
+       {
+        "at": 1,
+        "do": "click",
+        "selector": "#play"
+       },
+       {
+        "at": 2,
+        "do": "click",
+        "selector": "#badge-1"
+       },
+       {
+        "at": 5,
+        "do": "click",
+        "selector": "#badge-2"
+       },
+       {
+        "at": 8,
+        "do": "click",
+        "selector": "#badge-3"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
    "id": "clip-12626-20261109-193635",
    "title": "Celadon City, 3 badges, Nov 10 00:47 UTC",
    "description": "Guided video: ten minutes of the AI playing, unedited. Live replay: the same minutes as the button log it pressed, driven on the public record of this run (arena run 23a69aed27a1).",
